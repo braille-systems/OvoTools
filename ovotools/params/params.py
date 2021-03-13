@@ -3,6 +3,7 @@ import json
 import ast
 import os
 from collections import OrderedDict
+from pathlib import Path
 
 
 class AttrDict(OrderedDict):
@@ -100,7 +101,7 @@ class AttrDict(OrderedDict):
         '''
         if base_fn is None:
             base_fn = self.get_base_filename()
-        params_fn = base_fn + '.param.txt'
+        params_fn = str(Path(base_fn) / 'param.txt')
         if not can_overwrite:
             assert not os.path.exists(params_fn), "Can't save parameters to {}: File exists".format(params_fn)
         if create_dirs:
